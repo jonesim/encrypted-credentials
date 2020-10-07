@@ -5,9 +5,9 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="encrypted-credentials",
-    version="0.0.1",
+    version="0.0.2",
     author="Ian Jones",
-    description="Encrypt credentials/Django settings to store in repositries",
+    description="Encrypt credentials/Django settings to store in repositories",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jonesim/encrypted-credentials",
@@ -18,4 +18,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=['cryptography'],
 )
