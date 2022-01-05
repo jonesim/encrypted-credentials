@@ -6,7 +6,9 @@ class NoEncryptedData(Exception):
     pass
 
 
-def get_decrypted_file(original_filename, settings_key=None, encrypted_filename=None):
+def get_decrypted_file(original_filename, settings_key=None, encrypted_filename=None, initial_data=None):
+    if isinstance(initial_data, str):
+        initial_data = initial_data.encode('utf-8')
     if not settings_key:
         settings_key = get_key()
         if not settings_key:
@@ -19,8 +21,7 @@ def get_decrypted_file(original_filename, settings_key=None, encrypted_filename=
         with open(encrypted_filename, 'rb') as f:
             encrypted_data = encryption.decrypt(f.read())
 
-    initial_data = None
-    if os.path.isfile(original_filename):
+    if not initial_data and os.path.isfile(original_filename):
         with open(original_filename, 'rb') as f:
             initial_data = f.read()
 
