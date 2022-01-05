@@ -10,6 +10,7 @@ from .encrypted_file import get_decrypted_file, random_key
 env_key_name = 'SETTINGS_KEY'
 python_settings = 'PRIVATE_settings'
 json_settings_file = 'settings.json'
+env_key_file_name = 'PRIVATE_KEY.env'
 
 default_module_file = '''
 # DO NOT CHECK INTO REPOSITORY
@@ -36,7 +37,7 @@ def create_key(key_file):
 
 
 def get_or_create_key_file(path):
-    key_file = os.path.join(path, 'PRIVATE_KEY.env')
+    key_file = os.path.join(path, env_key_file_name)
     if not os.path.isfile(key_file):
         create_key(key_file)
     f = open(key_file, 'r')
