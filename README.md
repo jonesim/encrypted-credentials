@@ -1,7 +1,7 @@
 
 **encrypted-credentials** encrypts credentials to allow them to be securely added to git repositories.
 
-It can import encrypted settings into Django defined in a json file. 
+It can import encrypted settings into Django defined in a python module and or a json file. 
 Encrypted files are automatically generated.
 
 
@@ -9,7 +9,19 @@ Encrypted files are automatically generated.
 
 _example_
 
+
+**PRIVATE_settings.py**
+
+File stored in folder with django settings.py file
+
+    private_settings = {
+      "AWS_ACCESS_KEY_ID":"ABCDEFGHIJKLMNOP",
+      "AWS_SECRET_ACCESS_KEY":"ABCDEFGHIJKLMNOP"
+    }
+
 **settings.json** 
+
+File stored in folder with django settings.py file
 
     {
       "AWS_ACCESS_KEY_ID":"ABCDEFGHIJKLMNOP",
@@ -23,10 +35,10 @@ _example_
     
     add_encrypted_settings(globals())
 
-Upon first execution an example key will be displayed
 
-    No SETTINGS_KEY set in Environment for secure settings
-        A new project can use: SETTINGS_KEY=FQQcgYWCBPE8l8IbHdcNie0WARbYHeFwCl4hIL3ecF0=
+Upon first execution a PRIVATE_KEY.env file will be generated with a random encryption key. DO NOT check this into repository.
+if PRIVATE_settings.py does not exist it will generate a template module.
+
         
 **set environment variable**
 
@@ -37,7 +49,7 @@ Upon first execution an example key will be displayed
 2. If `settings.json` and `settings.json.enc` exist then they will be compared and if different `settings.json.enc` will be overwritten.**(development)**
 3. If `settings.json` does not exist then `settings.json.enc` will be used **(production)**
 
-settings.json.enc can be checked into git as it is encrypted with Fernet AES128 encryption 
+settings.json.enc and or PRIVATE_settings.enc can be checked into git as it is encrypted with Fernet AES128 encryption 
 
  
 ## Credential files
