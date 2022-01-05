@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="encrypted-credentials",
-    version="0.0.2",
+    version="0.0.3",
     author="Ian Jones",
     description="Encrypt credentials/Django settings to store in repositories",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jonesim/encrypted-credentials",
-    packages=setuptools.find_packages(),
+    packages=['encrypted_credentials'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
