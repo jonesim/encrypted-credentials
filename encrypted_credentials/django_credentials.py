@@ -46,10 +46,13 @@ def get_or_create_key_file(path):
             return line[line.find('=') + 1:]
 
 
-def module_json(module):
+def module_json(module, module_path):
     try:
         urlconf_module = import_module(module)
     except ModuleNotFoundError:
+        module_name = f'{module_path}/{module.split(".")[-1]}'
+        if os.path.exists(module_name + '.enc'):
+            return None, module_name
         return None, None
     private_settings = getattr(urlconf_module, 'private_settings', {})
     return json.dumps(private_settings), urlconf_module.__file__[:-3]
@@ -66,8 +69,8 @@ def add_encrypted_settings(module_globals, settings_file=None, settings_module=N
         os.environ[env_key_name] = get_or_create_key_file(settings_path)
 
     if settings_module:
-        json_settings, module_file = module_json(settings_module)
-        if json_settings:
+        json_settings, module_file = module_json(settings_module, settings_path)
+        if json_settings or module_file:
             try:
                 module_globals.update(json.loads(get_decrypted_file(module_file, key, initial_data=json_settings)))
             except InvalidToken:
