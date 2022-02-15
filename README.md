@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/encrypted-credentials.svg)](https://badge.fury.io/py/encrypted-credentials)
 
 **encrypted-credentials** encrypts credentials to allow them to be securely added to git repositories.
 
