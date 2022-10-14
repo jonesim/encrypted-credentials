@@ -87,5 +87,14 @@ usage
     credentials = get_credentials('gmail')
     
     
+By default any keys in the private_settings file get added to the django setting file. For example a private_settings file of:
 
-     
+    private_settings = {
+      "AWS_ACCESS_KEY_ID":"ABCDEFGHIJKLMNOP",
+      "AWS_SECRET_ACCESS_KEY":"ABCDEFGHIJKLMNOP"
+    }
+    
+ The AWS_ACCESS_KEY_ID can be access by doing the following:
+ 
+    from django.conf import settings
+    KEY = settings.AWS_ACCESS_KEY_ID
